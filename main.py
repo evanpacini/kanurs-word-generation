@@ -129,8 +129,9 @@ if links is None:
         exit(1)
 
 markov_chain = build_markov_chain(links, 2)
-while True:
-    input()
+
+print("Press enter to generate new words and type q to exit")
+while input() != 'q':
     for _ in range(20):
         generated_word = generate(markov_chain)
         if generated_word not in links:
