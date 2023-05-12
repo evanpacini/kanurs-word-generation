@@ -30,8 +30,8 @@ KANURS_RANGE = 'Words/Phrases!B2:B'
 
 
 def main():
-    """Shows basic usage of the Sheets API.
-    Prints values from a sample spreadsheet.
+    """Gets words from Google Sheets, backs them up and returns them.
+    :return: A list of words from the Google Sheets document.
     """
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
