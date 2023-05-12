@@ -50,7 +50,8 @@ def main():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
+            flow = InstalledAppFlow.from_client_secrets_file(
+                "credentials.json", SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open("token.json", "w") as token:
@@ -61,17 +62,15 @@ def main():
 
         # Call the Sheets API
         sheet = service.spreadsheets()
-        result = (
-            sheet.values().get(spreadsheetId=KANURS_ID, range=KANURS_RANGE).execute()
-        )
+        result = (sheet.values().get(spreadsheetId=KANURS_ID,
+                                     range=KANURS_RANGE).execute())
         values = result.get("values", [])
 
         if not values:
             print("No data found in the sheets document.")
             return
         words = [
-            word[0]
-            for word in values
+            word[0] for word in values
             if word != [] and " " not in word[0] and "-" not in word[0]
         ]
         # back up words for offline use in json format
@@ -96,8 +95,8 @@ def build_markov_chain(data, n):
     for word in data:
         word_wrapped = str(word) + "."
         for i in range(len(word_wrapped) - n):
-            item = word_wrapped[i : i + n]
-            next_item = word_wrapped[i + 1 : i + n + 1]
+            item = word_wrapped[i:i + n]
+            next_item = word_wrapped[i + 1:i + n + 1]
 
             if item in chain:
                 entry = chain[item]
