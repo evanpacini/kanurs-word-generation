@@ -24,6 +24,7 @@ from googleapiclient.discovery import build
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 # The ID and range of a sample spreadsheet.
+# noinspection SpellCheckingInspection
 KANURS_ID = '1DjvktdD-oWmu6AAEPWWCdV3gQWpFJvmJzxEMMRGX5UM'
 KANURS_RANGE = 'Words/Phrases!B2:B'
 
@@ -67,8 +68,8 @@ def main():
         with open('words_back_up.json', 'w', encoding='UTF-8') as f:
             f.write(json.dumps(words))
         return words
-    except:
-        print('An error occurred while fetching data from Google Sheets.')
+    except Exception as google_api_err:
+        print(f'An error occurred while fetching data from Google Sheets: {google_api_err}')
         return None
 
 
@@ -134,8 +135,8 @@ links = main()
 if links is None:
     print('Could not get newest data, so using last previous back-up.')
     try:
-        with open('words_back_up.json', 'r', encoding='UTF-8') as f:
-            links = eval(f.read())
+        with open('words_back_up.json', 'r', encoding='UTF-8') as backup:
+            links = eval(backup.read())
     except IOError as err:
         print(f'Could not find any back-up data: {err}. Exiting.')
         exit(1)
