@@ -12,7 +12,8 @@ class TestBuildMarkovChain(unittest.TestCase):
         # Input with only one word and order less than or equal to the length of the word
         (['hello'], 1,
          {'initial': {'h': 1}, 'names': {'hello'}, 'h': {'e': 1}, 'e': {'l': 1}, 'l': {'l': 1, 'o': 1}, 'o': {'.': 1}}),
-        (['hello'], 5, {'hello': {'ello.': 1}, 'initial': {'hello': 1}, 'names': {'hello'}}),
+        (['hello'], 5, {'hello': {'ello.': 1},
+         'initial': {'hello': 1}, 'names': {'hello'}}),
 
         # Input with only one word and order greater than the length of the word
         (['hello'], 6, {'initial': {}, 'names': {'hello'}}),
@@ -24,7 +25,8 @@ class TestBuildMarkovChain(unittest.TestCase):
          {'by': {'ye': 1}, 'hi': {'i.': 1}, 'initial': {'by': 1, 'hi': 1}, 'names': {'hi', 'bye'}, 'ye': {'e.': 1}}),
 
         # Input with multiple words and order greater than the length of the shortest word
-        (['hi', 'bye'], 3, {'bye': {'ye.': 1}, 'initial': {'bye': 1}, 'names': {'hi', 'bye'}}),
+        (['hi', 'bye'], 3, {'bye': {'ye.': 1},
+         'initial': {'bye': 1}, 'names': {'hi', 'bye'}}),
         (['hello', 'world'], 5,
          {'hello': {'ello.': 1}, 'initial': {'hello': 1, 'world': 1}, 'names': {'hello', 'world'},
           'world': {'orld.': 1}}),
@@ -42,11 +44,13 @@ class TestBuildMarkovChain(unittest.TestCase):
 
     # Boundary tests
     def test_build_markov_chain_min_input(self):
-        self.assertEqual({'initial': {}, 'names': {''}}, build_markov_chain([''], 1))
+        self.assertEqual({'initial': {}, 'names': {''}},
+                         build_markov_chain([''], 1))
 
     def test_build_markov_chain_max_input(self):
         max_input = ['a' * 100] * 100
-        self.assertEqual({'initial': {'a': 100}, 'names': {'a' * 100}, 'a': {'.': 100, 'a': 9900}}, build_markov_chain(max_input, 1))
+        self.assertEqual({'initial': {'a': 100}, 'names': {
+                         'a' * 100}, 'a': {'.': 100, 'a': 9900}}, build_markov_chain(max_input, 1))
 
 
 if __name__ == '__main__':

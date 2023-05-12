@@ -2,7 +2,8 @@
 """uncle_markov.py: Generates random words using a Markov chain based on words from Google Sheets."""
 __author__ = "Evan Pacini, Kasper van Maasdam"
 __copyright__ = "Copyright 2023, Espersoft Inc."
-__credits__ = ["Evan Pacini", "Kasper van Maasdam", "Timo de Kok", "Luke Kuijpers", "Lex Kuijpers"]
+__credits__ = ["Evan Pacini", "Kasper van Maasdam",
+               "Timo de Kok", "Luke Kuijpers", "Lex Kuijpers"]
 
 __license__ = "GPL"
 __version__ = "0.1.0"
@@ -63,13 +64,15 @@ def main():
         if not values:
             print('No data found in the sheets document.')
             return
-        words = [word[0] for word in values if word != [] and ' ' not in word[0] and '-' not in word[0]]
+        words = [word[0] for word in values if word != []
+                 and ' ' not in word[0] and '-' not in word[0]]
         # back up words for offline use in json format
         with open('words_back_up.json', 'w', encoding='UTF-8') as f:
             f.write(json.dumps(words))
         return words
     except Exception as google_api_err:
-        print(f'An error occurred while fetching data from Google Sheets: {google_api_err}')
+        print(
+            f'An error occurred while fetching data from Google Sheets: {google_api_err}')
         return None
 
 
