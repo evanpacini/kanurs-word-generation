@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""main.py: Generates random words using a Markov chain based on words from Google Sheets."""
+"""uncle_markov.py: Generates random words using a Markov chain based on words from Google Sheets."""
 __author__ = "Evan Pacini, Kasper van Maasdam"
 __copyright__ = "Copyright 2023, Espersoft Inc."
 __credits__ = ["Evan Pacini", "Kasper van Maasdam", "Timo de Kok", "Luke Kuijpers", "Lex Kuijpers"]
@@ -75,7 +75,7 @@ def main():
 
 def build_markov_chain(data, n):
     """Build a markov chain from the given data and order.
-    :param data: The data to build the markov chain from.
+    :param data: The array with words to build the markov chain from.
     :param n: The markov chain order.
     :return: The markov chain represented as a dictionary."""
     chain = {"initial": {}, "names": set(data)}
@@ -131,21 +131,22 @@ def generate(chain):
     return generated
 
 
-links = main()
-if links is None:
-    print('Could not get newest data, so using last previous back-up.')
-    try:
-        with open('words_back_up.json', 'r', encoding='UTF-8') as backup:
-            links = eval(backup.read())
-    except IOError as err:
-        print(f'Could not find any back-up data: {err}. Exiting.')
-        exit(1)
+if __name__ == '__main__':
+    links = main()
+    if links is None:
+        print('Could not get newest data, so using last previous back-up.')
+        try:
+            with open('words_back_up.json', 'r', encoding='UTF-8') as backup:
+                links = eval(backup.read())
+        except IOError as err:
+            print(f'Could not find any back-up data: {err}. Exiting.')
+            exit(1)
 
-markov_chain = build_markov_chain(links, 2)
+    markov_chain = build_markov_chain(links, 2)
 
-print("Press enter to generate new words and type q to exit")
-while input() != 'q':
-    for _ in range(20):
-        generated_word = generate(markov_chain)
-        if generated_word not in links:
-            print(generated_word)
+    print("Press enter to generate new words and type q to exit")
+    while input() != 'q':
+        for _ in range(20):
+            generated_word = generate(markov_chain)
+            if generated_word not in links:
+                print(generated_word)
