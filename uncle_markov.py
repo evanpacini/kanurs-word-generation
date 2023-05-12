@@ -78,6 +78,8 @@ def build_markov_chain(data, n):
     :param data: The array with words to build the markov chain from.
     :param n: The markov chain order.
     :return: The markov chain represented as a dictionary."""
+    if n <= 0:
+        return {}
     chain = {"initial": {}, "names": set(data)}
     for word in data:
         word_wrapped = str(word) + "."
