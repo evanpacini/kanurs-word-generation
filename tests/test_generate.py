@@ -1,6 +1,8 @@
 import unittest
-from uncle_markov import generate
+
 from parameterized import parameterized
+
+from uncle_markov import generate
 
 
 class TestGenerate(unittest.TestCase):

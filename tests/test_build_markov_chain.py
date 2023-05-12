@@ -1,6 +1,8 @@
 import unittest
-from uncle_markov import build_markov_chain
+
 from parameterized import parameterized
+
+from uncle_markov import build_markov_chain
 
 
 class TestBuildMarkovChain(unittest.TestCase):

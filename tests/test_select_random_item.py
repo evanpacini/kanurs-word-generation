@@ -1,7 +1,9 @@
-import unittest
-import uncle_markov
 import random
+import unittest
+
 from parameterized import parameterized
+
+import uncle_markov
 
 
 class TestSelectRandomItem(unittest.TestCase):
