@@ -1,4 +1,16 @@
 #!/usr/bin/env python3
+"""main.py: Generates random words using a Markov chain based on words from Google Sheets."""
+__author__ = "Evan Pacini, Kasper van Maasdam"
+__copyright__ = "Copyright 2023, Espersoft Inc."
+__credits__ = ["Evan Pacini", "Kasper van Maasdam", "Timo de Kok", "Luke Kuijpers", "Lex Kuijpers"]
+
+__license__ = "GPL"
+__version__ = "0.1.0"
+__maintainer__ = "Evan Pacini, Kasper van Maasdam"
+__email__ = "espersoft.inc@gmail.com"
+__status__ = "Development"
+__date__ = "12-05-2023"
+
 import json
 import os.path
 import random
